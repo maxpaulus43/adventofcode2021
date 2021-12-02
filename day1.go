@@ -1,25 +1,9 @@
 package main
 
-import (
-	_ "embed"
-	"strconv"
-	"strings"
-)
-
-//go:embed inputs/day1.txt
-var day1Txt string
-
-func makeDepths() []int {
-	depths := make([]int, 0)
-	for _, val := range strings.Split(day1Txt, "\n") {
-		n, _ := strconv.Atoi(val)
-		depths = append(depths, n)
-	}
-	return depths
-}
+const inputFile = "inputs/day1.txt"
 
 func day1Part1() int {
-	depths := makeDepths()
+	depths := numsFromFile(inputFile)
 
 	depthIncreased := 0
 	for i := 1; i < len(depths); i++ {
@@ -31,7 +15,7 @@ func day1Part1() int {
 }
 
 func day1Part2() int {
-	depths := makeDepths()
+	depths := numsFromFile(inputFile)
 
 	depthIncreased := 0
 	for i := 3; i < len(depths); i++ {
