@@ -45,13 +45,13 @@ type conditionFunc func(int, int) bool
 func day3Part2() int64 {
 	numsFromFile := linesFromFile("inputs/day3.txt")
 
-	findNumsSatifyingCondition := func(cond conditionFunc) string {
+	findRatingSatifyingCondition := func(cond conditionFunc) string {
 		nums := numsFromFile
 		pos := 0
 
 		for len(nums) > 1 {
-			numsWithOnes := make([]string, 0)
-			numsWithZeroes := make([]string, 0)
+			numsWithOnes := make([]string, 0, len(nums)/2)
+			numsWithZeroes := make([]string, 0, len(nums)/2)
 
 			for _, n := range nums {
 				if n[pos] == '0' {
@@ -72,8 +72,8 @@ func day3Part2() int64 {
 		return nums[0]
 	}
 
-	o2Rating := findNumsSatifyingCondition(func(a int, b int) bool { return a > b })
-	co2Rating := findNumsSatifyingCondition(func(a int, b int) bool { return a <= b })
+	o2Rating := findRatingSatifyingCondition(func(zeroesCount int, onesCount int) bool { return zeroesCount > onesCount })
+	co2Rating := findRatingSatifyingCondition(func(zeroesCount int, onesCount int) bool { return zeroesCount <= onesCount })
 
 	o2RatingDecimal, err := strconv.ParseInt(o2Rating, 2, 0)
 	check(err)
