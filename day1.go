@@ -1,9 +1,7 @@
 package main
 
-const inputFile = "inputs/day1.txt"
-
 func day1Part1() int {
-	depths := numsFromFile(inputFile)
+	depths := numsFromFile("inputs/day1.txt")
 
 	depthIncreased := 0
 	for i := 1; i < len(depths); i++ {
@@ -15,7 +13,7 @@ func day1Part1() int {
 }
 
 func day1Part2() int {
-	depths := numsFromFile(inputFile)
+	depths := numsFromFile("inputs/day1.txt")
 
 	depthIncreased := 0
 	for i := 3; i < len(depths); i++ {
