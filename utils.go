@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	_ "embed"
 	"os"
 	"strconv"
 )
@@ -29,39 +30,43 @@ func linesFromFile(fileName string) []string {
 }
 
 func numsFromFile(fileName string) []int {
-	file, err := os.Open(fileName)
-	check(err)
-	defer file.Close()
+	return stringsToInts(linesFromFile(fileName))
+}
 
-	result := make([]int, 0)
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		num, err := strconv.Atoi(scanner.Text())
+func stringsToInts(strings []string) []int {
+	result := make([]int, 0, len(strings))
+	for _, s := range strings {
+		n, err := strconv.Atoi(s)
 		check(err)
-		result = append(result, num)
+		result = append(result, n)
 	}
-
-	check(scanner.Err())
-
 	return result
 }
 
 // wait for golang 1.18 to make something more generic
 
-// func valuesFromFile(fileName string, conversionFunc func(string) (interface{}, error)) []interface{} {
+// func mapValuesFromFile[T any](fileName string, fn func(string) (T, error)) []T {
 // 	file, err := os.Open(fileName)
 // 	check(err)
 // 	defer file.Close()
 
-// 	result := make([]interface{}, 0)
+// 	result := make([]T, 0)
 // 	scanner := bufio.NewScanner(file)
 // 	for scanner.Scan() {
-// 		val, err := conversionFunc(scanner.Text())
+// 		val, err := fn(scanner.Text())
 // 		check(err)
 // 		result = append(result, val)
 // 	}
 
 // 	check(scanner.Err())
 
+// 	return result
+// }
+
+// func Map[T any, K any](fn func(T) K, arr []T) []K {
+// 	result := make([]K, 0, len(arr))
+// 	for _, elem := range arr {
+// 		result = append(result, fn(elem))
+// 	}
 // 	return result
 // }
