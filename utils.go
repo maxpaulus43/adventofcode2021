@@ -2,7 +2,7 @@ package main
 
 import (
 	"bufio"
-	_ "embed"
+	"math"
 	"os"
 	"strconv"
 )
@@ -43,30 +43,18 @@ func stringsToInts(strings []string) []int {
 	return result
 }
 
-// wait for golang 1.18 to make something more generic
+func abs(n int) int {
+	return int(math.Abs(float64(n)))
+}
 
-// func mapValuesFromFile[T any](fileName string, fn func(string) (T, error)) []T {
-// 	file, err := os.Open(fileName)
-// 	check(err)
-// 	defer file.Close()
+func sum(nums ...int) int {
+	sum := 0
+	for _, n := range nums {
+		sum += n
+	}
+	return sum
+}
 
-// 	result := make([]T, 0)
-// 	scanner := bufio.NewScanner(file)
-// 	for scanner.Scan() {
-// 		val, err := fn(scanner.Text())
-// 		check(err)
-// 		result = append(result, val)
-// 	}
-
-// 	check(scanner.Err())
-
-// 	return result
-// }
-
-// func Map[T any, K any](fn func(T) K, arr []T) []K {
-// 	result := make([]K, 0, len(arr))
-// 	for _, elem := range arr {
-// 		result = append(result, fn(elem))
-// 	}
-// 	return result
-// }
+func avg(nums ...int) float64 {
+	return float64(sum(nums...)) / float64(len(nums))
+}
