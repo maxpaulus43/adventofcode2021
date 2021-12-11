@@ -38,7 +38,7 @@ func (g *octopusGrid) step() int {
 
 	flashes := 0
 
-	for g.shouldKeepFlashing(didFlash) {
+	for g.shouldKeepFlashing() {
 		for i := range *g {
 			for j := range (*g)[0] {
 				if (*g)[i][j] > 9 {
@@ -59,7 +59,7 @@ func (g *octopusGrid) step() int {
 	return flashes
 }
 
-func (g octopusGrid) shouldKeepFlashing(didFlash [][]bool) bool {
+func (g octopusGrid) shouldKeepFlashing() bool {
 	for i := range g {
 		for j := range g[0] {
 			if g[i][j] > 9 {
