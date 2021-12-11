@@ -24,32 +24,32 @@ func day11Part1() int {
 type octopusGrid [][]int
 
 // returns how many flashes there were
-func (g *octopusGrid) step() int {
-	for i := range *g {
-		for j := range (*g)[0] {
-			(*g)[i][j] += 1
+func (g octopusGrid) step() int {
+	for i := range g {
+		for j := range (g)[0] {
+			(g)[i][j] += 1
 		}
 	}
 
-	didFlash := make([][]bool, len(*g))
-	for i := 0; i < len(*g); i++ {
-		didFlash[i] = make([]bool, len((*g)[0]))
+	didFlash := make([][]bool, len(g))
+	for i := 0; i < len(g); i++ {
+		didFlash[i] = make([]bool, len((g)[0]))
 	}
 
 	flashes := 0
 
 	for g.shouldKeepFlashing() {
-		for i := range *g {
-			for j := range (*g)[0] {
-				if (*g)[i][j] > 9 {
+		for i := range g {
+			for j := range (g)[0] {
+				if (g)[i][j] > 9 {
 					didFlash[i][j] = true
 				}
 			}
 		}
 
-		for i := range *g {
-			for j := range (*g)[0] {
-				if didFlash[i][j] && (*g)[i][j] > 9 {
+		for i := range g {
+			for j := range g[0] {
+				if didFlash[i][j] && g[i][j] > 9 {
 					g.flash(didFlash, i, j)
 					flashes += 1
 				}
@@ -70,41 +70,41 @@ func (g octopusGrid) shouldKeepFlashing() bool {
 	return false
 }
 
-func (g *octopusGrid) flash(didFlash [][]bool, i, j int) {
+func (g octopusGrid) flash(didFlash [][]bool, i, j int) {
 	// update topleft
 	if i > 0 && j > 0 && !didFlash[i-1][j-1] {
-		(*g)[i-1][j-1] += 1
+		g[i-1][j-1] += 1
 	}
 	// update topmid
 	if i > 0 && !didFlash[i-1][j] {
-		(*g)[i-1][j] += 1
+		g[i-1][j] += 1
 	}
 	// update topright
-	if i > 0 && j < len((*g)[0])-1 && !didFlash[i-1][j+1] {
-		(*g)[i-1][j+1] += 1
+	if i > 0 && j < len(g[0])-1 && !didFlash[i-1][j+1] {
+		g[i-1][j+1] += 1
 	}
 	// update leftleft
 	if j > 0 && !didFlash[i][j-1] {
-		(*g)[i][j-1] += 1
+		g[i][j-1] += 1
 	}
 	// update rightright
-	if j < len((*g)[0])-1 && !didFlash[i][j+1] {
-		(*g)[i][j+1] += 1
+	if j < len(g[0])-1 && !didFlash[i][j+1] {
+		g[i][j+1] += 1
 	}
 	// update bottomleft
-	if i < len(*g)-1 && j > 0 && !didFlash[i+1][j-1] {
-		(*g)[i+1][j-1] += 1
+	if i < len(g)-1 && j > 0 && !didFlash[i+1][j-1] {
+		g[i+1][j-1] += 1
 	}
 	// update bottommid
-	if i < len(*g)-1 && !didFlash[i+1][j] {
-		(*g)[i+1][j] += 1
+	if i < len(g)-1 && !didFlash[i+1][j] {
+		g[i+1][j] += 1
 	}
 	// update bottomright
-	if i < len(*g)-1 && j < len((*g)[0])-1 && !didFlash[i+1][j+1] {
-		(*g)[i+1][j+1] += 1
+	if i < len(g)-1 && j < len(g[0])-1 && !didFlash[i+1][j+1] {
+		g[i+1][j+1] += 1
 	}
 
-	(*g)[i][j] = 0
+	g[i][j] = 0
 }
 
 func day11Part2() int {
