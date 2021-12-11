@@ -26,22 +26,22 @@ type octopusGrid [][]int
 // returns how many flashes there were
 func (g octopusGrid) step() int {
 	for i := range g {
-		for j := range (g)[0] {
-			(g)[i][j] += 1
+		for j := range g[0] {
+			g[i][j] += 1
 		}
 	}
 
 	didFlash := make([][]bool, len(g))
 	for i := 0; i < len(g); i++ {
-		didFlash[i] = make([]bool, len((g)[0]))
+		didFlash[i] = make([]bool, len(g[0]))
 	}
 
 	flashes := 0
 
 	for g.shouldKeepFlashing() {
 		for i := range g {
-			for j := range (g)[0] {
-				if (g)[i][j] > 9 {
+			for j := range g[0] {
+				if g[i][j] > 9 {
 					didFlash[i][j] = true
 				}
 			}
