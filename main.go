@@ -17,5 +17,7 @@ func main() {
 	// fmt.Println(day8Part2())
 	// fmt.Println(day9Part1())
 	// fmt.Println(day10part1())
-	fmt.Println(day10part2())
+	// fmt.Println(day10part2())
+	// fmt.Println(day11Part1())
+	fmt.Println(day11Part2())
 }

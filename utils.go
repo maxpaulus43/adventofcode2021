@@ -58,3 +58,25 @@ func sum(nums ...int) int {
 func avg(nums ...int) float64 {
 	return float64(sum(nums...)) / float64(len(nums))
 }
+
+type runes []rune
+
+func (r runes) Len() int           { return len(r) }
+func (r runes) Swap(i, j int)      { r[i], r[j] = r[j], r[i] }
+func (r runes) Less(i, j int) bool { return r[i] < r[j] }
+
+type stack []rune
+
+func (s *stack) pop() rune {
+	tmp := (*s)[len(*s)-1]
+	*s = (*s)[:len(*s)-1]
+	return tmp
+}
+
+func (s *stack) push(elem rune) {
+	*s = append(*s, elem)
+}
+
+func (s stack) peek() rune {
+	return s[len(s)-1]
+}

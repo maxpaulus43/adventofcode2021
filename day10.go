@@ -88,19 +88,3 @@ outer:
 
 	return scores[len(scores)/2]
 }
-
-type stack []rune
-
-func (s *stack) pop() rune {
-	tmp := (*s)[len(*s)-1]
-	*s = (*s)[:len(*s)-1]
-	return tmp
-}
-
-func (s *stack) push(elem rune) {
-	*s = append(*s, elem)
-}
-
-func (s stack) peek() rune {
-	return s[len(s)-1]
-}

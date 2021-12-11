@@ -128,9 +128,3 @@ func encompasses(outer, inner string) bool {
 	}
 	return true
 }
-
-type runes []rune
-
-func (r runes) Len() int           { return len(r) }
-func (r runes) Swap(i, j int)      { r[i], r[j] = r[j], r[i] }
-func (r runes) Less(i, j int) bool { return r[i] < r[j] }

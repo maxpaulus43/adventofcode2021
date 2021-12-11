@@ -1,6 +1,7 @@
 package main
 
 // import (
+// 	"fmt"
 // 	"strings"
 // )
 
@@ -19,7 +20,7 @@ package main
 // 	leastRecentlyMarked pos
 // }
 
-// func (b board) mark(p pos) {
+// func (b *board) mark(p pos) {
 // 	b.inner[p.row][p.col].isMarked = true
 // 	b.leastRecentlyMarked = p
 // }
@@ -49,10 +50,10 @@ package main
 
 // func day4Part1() int {
 // 	lines := linesFromFile("inputs/day4.txt")
-// 	nums := stringsToInts(strings.Split(lines[0], ","))
+// 	stringsToInts(strings.Split(lines[0], ","))
 // 	lines = lines[2:]
 
-// 	boards := make([]board, 0, len(lines)/6)
+// 	boards := make([]board, 0)
 // 	currentBoard := board{inner: make([][]spot, 0)}
 // 	currentRow := 0
 // 	for _, line := range lines {
@@ -61,9 +62,12 @@ package main
 // 			currentBoard = board{inner: make([][]spot, 0)}
 // 			currentRow = 0
 // 		} else {
-// 			nums := stringsToInts(strings.Split(line, " "))
-// 			spots := make()
-// 			currentBoard.inner = append(currentBoard.inner, row)
+// 			ns := stringsToInts(strings.Split(line, " "))
+
+// 			currentBoard.inner = append(currentBoard.inner[currentRow], ns)
+// 			currentRow++
 // 		}
 // 	}
+
+// 	fmt.Println(boards)
 // }
